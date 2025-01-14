@@ -10,10 +10,13 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
       - name: build
-        run: docker build -t shriesannith/practice
+        run: docker build -t shriesannith/practice .
+
       - name: push
         run: docker push shriesannith/practice
 
@@ -23,5 +26,6 @@ jobs:
     steps:
       - name: pull
         run: docker pull shriesannith/practice
+
       - name: run
         run: docker run --name practice-container -d -p 5000:5000 shriesannith/practice
