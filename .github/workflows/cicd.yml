@@ -1,0 +1,26 @@
+name: deploy app
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    name: build app
+    runs-on: ubuntu-lates
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build
+        run: docker build -t shriesannith/practice
+      - name: push
+        run: docker push shriesannith/practice
+
+  deploy:
+  name:
+    runs-on: ubuntu-lates
+    steps:
+      - name: pull
+        run: docker pull shriesannith/practice
+      - name: run
+        run: docker run --name practice-container -d -p 5000:5000 shriesannith/practice
