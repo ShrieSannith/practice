@@ -5,7 +5,7 @@ on:
     branches: master
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -17,16 +17,5 @@ jobs:
       - name: build
         run: docker build -t shriesannith/practice .
 
-      - name: push
-        run: docker push shriesannith/practice
-
-  deploy:
-  name:
-    needs: build
-    runs-on: self-hosted
-    steps:
-      - name: pull
-        run: docker pull shriesannith/practice
-
       - name: run
-        run: docker run --name practice-container -d -p 5000:5000 shriesannith/practice
+        run: docker run -d -p 5000:5000 shriesannith/practice
