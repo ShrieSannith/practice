@@ -22,6 +22,7 @@ jobs:
 
   deploy:
   name:
+    needs: build
     runs-on: self-hosted
     steps:
       - name: pull
